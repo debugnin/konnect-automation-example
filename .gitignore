@@ -15,3 +15,6 @@ terraform.tfvars
 
 # Sensitive plan output (optional)
 *.tfplan
+
+# Certificate directory containing sensitive keys and certificates
+cert/

@@ -7,7 +7,7 @@ resource "konnect_gateway_service" "httpbin" {
   host             = "httpbin.org"
   port             = 443
   path             = "/"
-  control_plane_id = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id = konnect_gateway_control_plane.cba-cp-1.id
 }
 
 resource "konnect_gateway_route" "anything" {
@@ -17,7 +17,7 @@ resource "konnect_gateway_route" "anything" {
 
   strip_path = false
 
-  control_plane_id = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id = konnect_gateway_control_plane.cba-cp-1.id
   service = {
     id = konnect_gateway_service.httpbin.id
   }
@@ -44,24 +44,24 @@ resource "konnect_gateway_plugin_key_auth" "key-auth" {
     id = konnect_gateway_route.anything.id
   }
 
-  control_plane_id = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id = konnect_gateway_control_plane.cba-cp-1.id
 }
 
 # Create a consumer and a basic auth credential for that consumer
 resource "konnect_gateway_consumer" "alice" {
   username         = "alice"
   custom_id        = "alice"
-  control_plane_id = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id = konnect_gateway_control_plane.cba-cp-1.id
 }
 
 # Then a consumer group, and add the consumer to a group
 resource "konnect_gateway_consumer_group" "gold" {
   name             = "gold"
-  control_plane_id = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id = konnect_gateway_control_plane.cba-cp-1.id
 }
 
 resource "konnect_gateway_consumer_group_member" "ag" {
   consumer_id       = konnect_gateway_consumer.alice.id
   consumer_group_id = konnect_gateway_consumer_group.gold.id
-  control_plane_id  = konnect_gateway_control_plane.tfdemo.id
+  control_plane_id  = konnect_gateway_control_plane.cba-cp-1.id
 }
