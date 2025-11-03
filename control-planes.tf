@@ -97,3 +97,11 @@ resource "konnect_gateway_control_plane_membership" "anz-cp-group-membership" {
     { id = konnect_gateway_control_plane.anz-cp-1.id },
   ]
 }
+
+resource "konnect_gateway_control_plane" "dev_portal_sample" {
+    name         = "Dev Portal Control Plane"
+    cluster_type = "CLUSTER_TYPE_CONTROL_PLANE"
+    description  = "Test control plane for Dev Portal"
+    auth_type = "pinned_client_certs"
+    cloud_gateway = false
+}
